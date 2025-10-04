@@ -5,6 +5,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { GraphqlModule } from './graphql/graphql.module';
 import { UsersModule } from './users/users.module';
+import { VoteModule } from './vote/vote.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { UsersModule } from './users/users.module';
     }),
     GraphqlModule,
     UsersModule,
+    VoteModule,
   ],
   controllers: [AppController],
   providers: [AppService],

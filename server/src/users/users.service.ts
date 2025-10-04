@@ -1,6 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { User } from './users.entity';
-import { CreateUserInput } from './user.input';
+import { CreateUserInput, UpdateUserInput } from './user.input';
 
 @Injectable()
 export class UsersService {
@@ -26,6 +26,15 @@ export class UsersService {
       ...createUserInput,
     };
     this.users.push(user);
+    return user;
+  }
+  updateUser(id: string, updateUser: UpdateUserInput) {
+    const user = this.users.find((user) => user.id === id);
+    if (!user) {
+      throw new NotFoundException('user hasnt been found');
+    }
+    user.name = updateUser.name ?? user.name;
+    user.email = updateUser.email ?? user.email;
     return user;
   }
 }
